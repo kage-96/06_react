@@ -1,8 +1,9 @@
 import { posts } from '../data/posts';
 import classes from './BlogList.module.css';
 import type{ PostType } from '../Type/Post';
+import type React from 'react';
 
-export const BlogList = () => {
+export const BlogList:React.FC = () => {
   return (
     <>
     <ul className={classes.posts}>
