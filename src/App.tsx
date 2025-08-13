@@ -1,11 +1,19 @@
-import { Header } from './Components/Header'
-import { BlogList } from './Pages/BlogList'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Home } from './Pages/Home'
+import { BlogDetail } from './Pages/BlogDetail'
+import { Layout } from './Components/Layout'
 function App() {
 
   return (
     <>
-      <Header />
-      <BlogList />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path={`/post/:id`} element={<BlogDetail />} />
+            </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }

@@ -2,6 +2,7 @@ import { posts } from '../data/posts';
 import classes from './BlogList.module.css';
 import type{ PostType } from '../Type/Post';
 import type React from 'react';
+import { Link } from 'react-router-dom';
 
 export const BlogList:React.FC = () => {
   return (
@@ -11,6 +12,7 @@ export const BlogList:React.FC = () => {
         const date = new Date(post.createdAt);
         return(
           <li key={post.id} className={classes.post}>
+            <Link to={`/post/${post.id}/`}>
             <div>
               <div className={classes.post_header}>
                 <p className={classes.date}>{`${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`}</p>
@@ -32,6 +34,7 @@ export const BlogList:React.FC = () => {
                 ))}
               </div>
             </div>
+            </Link>
           </li>
         )
       })}

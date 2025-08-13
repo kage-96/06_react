@@ -1,0 +1,38 @@
+.detailContainer{
+  max-width: 800px;
+  margin:40px auto;
+}
+.detailPost{
+  padding:1rem;
+  box-sizing: border-box;
+}
+.detailHeader{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.date{
+  color:#ccc;
+  font-size:.8rem;
+}
+.category{
+  display: flex;
+  align-items: center;
+  li{
+    border:1px solid #06c;
+    color:#06c;
+    padding:.2rem .4rem;
+    border-radius:.2rem;font-size:.8rem;
+    &:not(:last-child){
+      margin-right:16px;
+    }
+  }
+}
+.detailTitle{
+  margin-bottom:1rem;
+  font-size:1.5rem;
+}
+.detailBody{
+  line-height:1.5;
+  font-size:1rem;
+}
