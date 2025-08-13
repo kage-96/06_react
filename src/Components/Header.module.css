@@ -1,0 +1,12 @@
+.header{
+  padding:24px;
+  box-sizing: border-box;
+  background-color: #333;
+  color:#fff;
+  font-weight:700;
+  ul{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

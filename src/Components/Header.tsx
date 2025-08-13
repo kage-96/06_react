@@ -1,9 +1,8 @@
-import { Link, Outlet } from "react-router-dom"
-
+import classes from './Header.module.css';
 export const Header = () => {
   return (
     <>
-      <header>
+      <header className={classes.header}>
         <nav>
           <ul>
             <li>Blog</li>
@@ -11,7 +10,6 @@ export const Header = () => {
           </ul>
         </nav>
       </header>
-      <Outlet />
     </>
   )
 }

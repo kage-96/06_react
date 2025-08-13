@@ -1,5 +1,6 @@
-// /src/data/posts.js
-export const posts = [
+import type { PostType } from "../Type/Post";
+
+export const posts: PostType[] = [
   {
     id: 1,
     title: '記事タイトル１',
