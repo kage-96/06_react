@@ -45,12 +45,7 @@ export const BlogDetail:React.FC = () => {
         </div>
         <div>
           <p className={classes.detailTitle}>{title}</p>
-          {content.split('<br/>').map((paragraph,index) => (
-            <div key={index}>
-              {paragraph}
-              <br />
-            </div>
-          ))}
+          <p dangerouslySetInnerHTML={{__html:content}} />
         </div>
       </div>
     </div>
