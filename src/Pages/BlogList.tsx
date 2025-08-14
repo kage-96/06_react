@@ -1,10 +1,30 @@
-import { posts } from '../data/posts';
 import classes from './BlogList.module.css';
 import type{ PostType } from '../Type/Post';
 import type React from 'react';
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 export const BlogList:React.FC = () => {
+  const [posts, setPosts ] = useState<PostType[]>([]);
+  const url = 'https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts'
+
+  useEffect(() => {
+    const getDatas = async () => {
+      try{
+        const res = await fetch(url);
+        const data = await res.json();
+        setPosts(data.posts);
+      }catch(err){
+        console.log(err);
+      }
+    }
+    getDatas()
+  },[])
+
+  if(posts.length ===0){
+    return <p>まだ投稿がありません。</p>
+  }
+
   return (
     <>
     <ul className={classes.posts}>
@@ -12,7 +32,7 @@ export const BlogList:React.FC = () => {
         const date = new Date(post.createdAt);
         return(
           <li key={post.id} className={classes.post}>
-            <Link to={`/post/${post.id}/`}>
+            <Link to={`/posts/${post.id}/`}>
             <div>
               <div className={classes.post_header}>
                 <p className={classes.date}>{`${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`}</p>
