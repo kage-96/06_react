@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 export const BlogList:React.FC = () => {
-  const [posts, setPosts ] = useState<PostType[] | undefined>(undefined);
+  const [posts, setPosts ] = useState<PostType[]>([]);
   const url = 'https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts'
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export const BlogList:React.FC = () => {
   return (
     <>
     <ul className={classes.posts}>
-      {posts?.map((post: PostType) => {
+      {posts.map((post: PostType) => {
         const date = new Date(post.createdAt);
         return(
           <li key={post.id} className={classes.post}>
