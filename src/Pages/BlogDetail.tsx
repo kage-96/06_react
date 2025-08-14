@@ -46,7 +46,7 @@ export const BlogDetail:React.FC = () => {
         <div className={classes.detailHeader}>
           <p className={classes.date}>{`${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`}</p>
           <ul className={classes.category}>
-            {categories.map(category => <li>{category}</li>)}
+            {categories.map(category => <li key={category}>{category}</li>)}
           </ul>
         </div>
         <div>

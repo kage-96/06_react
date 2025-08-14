@@ -8,5 +8,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    a{
+      color:#fff;
+    }
   }
 }
