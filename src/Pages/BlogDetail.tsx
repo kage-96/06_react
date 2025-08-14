@@ -9,18 +9,24 @@ export const BlogDetail:React.FC = () => {
   const [ loading, setLoading ] = useState(false);
   const [ post , setPost ] = useState<PostType | undefined>(undefined)
   const params = useParams();
+  const url = `https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts/${params.id}`
   
 
   useEffect(() => {
-    setLoading(true);
-    try{
-      const post:PostType | undefined = posts.find(post => post.id.toString() == params.id);
-      setPost(post);
-    }catch(err){
-      console.error(err);
-    }finally{
-      setLoading(false)
+    const getData = async () => {
+      try{
+        setLoading(true);
+        const res = await fetch(url);
+        const data = await res.json();
+        console.log(data)
+        setPost(data.post);
+      }catch(err){
+        console.error(err);
+      }finally{
+        setLoading(false)
+      }
     }
+    getData()
   },[])
 
   if (loading) {
