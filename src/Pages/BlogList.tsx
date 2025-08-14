@@ -21,6 +21,10 @@ export const BlogList:React.FC = () => {
     getDatas()
   },[])
 
+  if(!posts){
+    return <p>まだ投稿がありません。</p>
+  }
+
   return (
     <>
     <ul className={classes.posts}>
