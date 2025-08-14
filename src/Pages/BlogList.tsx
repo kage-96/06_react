@@ -21,7 +21,7 @@ export const BlogList:React.FC = () => {
     getDatas()
   },[])
 
-  if(!posts){
+  if(posts.length ===0){
     return <p>まだ投稿がありません。</p>
   }
 
