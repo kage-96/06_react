@@ -4,7 +4,7 @@ import type { FormData, FormError } from '../Type/Form'
 
 export const Contact:React.FC = () => {
   const url = 'https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/contacts';
-  const [isSubmitted, setIsSubmitted ] = useState<boolean>(false)
+  const [isSubmitting, setIsSubmitting ] = useState<boolean>(false)
 
   const [formData, setFormData] = useState<FormData>({
     name:"",
@@ -14,7 +14,7 @@ export const Contact:React.FC = () => {
 
   const [errors, setErrors] = useState<FormError>({})
 
-  const onClickClear = () => {
+  const handleClickClear = () => {
     setFormData({name:'',email:'',content:''});
   }
 
@@ -54,29 +54,28 @@ export const Contact:React.FC = () => {
   // 送信イベント
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
+    setIsSubmitting(true);
     const validationErrors = validate();
     setErrors(validationErrors);
 
-    if (Object.keys(validationErrors).length === 0) {
+    if (Object.keys(validationErrors).length !== 0) return
       // エラーなし → 送信処理
-      const fetchData = async () => {
-        try{
-          console.log("送信データ:", formData);
-          await fetch(url,{
-            method:'POST',
-            body:JSON.stringify(formData),
-          });
-          alert("送信成功！");
-          setFormData({ name: "", email: "", content: "" });
-        }catch(err){
-          console.log(err)
-        }finally{
-          setIsSubmitted(false);
-        }
+    const fetchData = async () => {
+      try{
+        console.log("送信データ:", formData);
+        await fetch(url,{
+          method:'POST',
+          body:JSON.stringify(formData),
+        });
+        alert("送信成功！");
+        setFormData({ name: "", email: "", content: "" });
+      }catch(err){
+        console.log(err)
+      }finally{
+        setIsSubmitting(false);
       }
-      fetchData();
     }
+    fetchData();
   };
 
   return (
@@ -88,7 +87,7 @@ export const Contact:React.FC = () => {
         <div className={classes.formItem}>
           <label htmlFor="name">お名前</label>
           <div>
-            <input type="text" name="name" id='name' onChange={handleChange} value={formData.name} readOnly={isSubmitted} />
+            <input type="text" name="name" id='name' onChange={handleChange} value={formData.name} readOnly={isSubmitting} />
             {errors.name && <p className={classes.warning}>{errors.name}</p>}
           </div>
         </div>
@@ -96,7 +95,7 @@ export const Contact:React.FC = () => {
         <div className={classes.formItem}>
           <label htmlFor="email">メールアドレス</label>
           <div>
-            <input type="email" name="email" value={formData.email} id='email' onChange={handleChange} readOnly={isSubmitted} />
+            <input type="email" name="email" value={formData.email} id='email' onChange={handleChange} readOnly={isSubmitting} />
             {errors.email && <p className={classes.warning}>{errors.email}</p>}
           </div>
         </div>
@@ -104,14 +103,14 @@ export const Contact:React.FC = () => {
         <div className={classes.formItem}>
           <label htmlFor="content">本文</label>
           <div>
-            <textarea rows={8} name="content" id="content" onChange={handleChange} value={formData.content} readOnly={isSubmitted}></textarea>
+            <textarea rows={8} name="content" id="content" onChange={handleChange} value={formData.content} readOnly={isSubmitting}></textarea>
             {errors.content && <p className={classes.warning}>{errors.content}</p>}
           </div>
         </div>
 
         <div className={classes.flex}>
-          <button className={classes.black} type='submit'>送信</button>
-          <button className={classes.gray} type='button' onClick={onClickClear}>クリア</button>
+          <button className={classes.black} type='submit' disabled={isSubmitting}>送信</button>
+          <button className={classes.gray} type='button' onClick={handleClickClear} disabled={isSubmitting}>クリア</button>
         </div>
 
       </form>
